@@ -10,7 +10,7 @@ export default function Navbar() {
     { name: 'Home', href: '#home', id: 'home' },
     { name: 'About Gail', href: '#about', id: 'about' },
     { name: 'Valuation', href: '#valuation', id: 'valuation' },
-    { name: 'Services', href: '#services', id: 'services' },
+    { name: 'Sold Deals', href: '#services', id: 'services' },
     { name: 'Reviews', href: '#reviews', id: 'reviews' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];

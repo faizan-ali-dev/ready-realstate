@@ -118,27 +118,40 @@ export default function PropertyModal({ property, onClose }) {
             marginBottom: '2rem'
           }}>
             <div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Price</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--primary-red)' }}>{property.price}</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Representation</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: '800', color: 'var(--primary-red)' }}>{property.role || 'Closed Deal'}</div>
             </div>
-            <div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Bedrooms</div>
-              <div style={{ fontSize: '1.2rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Bed size={18} color="#94A3B8" /> {property.beds} Beds
+            {property.beds !== null && (
+              <div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Bedrooms</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Bed size={18} color="#94A3B8" /> {property.beds} Beds
+                </div>
               </div>
-            </div>
-            <div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Bathrooms</div>
-              <div style={{ fontSize: '1.2rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Bath size={18} color="#94A3B8" /> {property.baths} Baths
+            )}
+            {property.baths !== null && (
+              <div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Bathrooms</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Bath size={18} color="#94A3B8" /> {property.baths} Baths
+                </div>
               </div>
-            </div>
-            <div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Square Feet</div>
-              <div style={{ fontSize: '1.2rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Maximize size={18} color="#94A3B8" /> {property.sqft} sqft
+            )}
+            {property.sqft !== null ? (
+              <div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Square Feet</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Maximize size={18} color="#94A3B8" /> {property.sqft.toLocaleString()} sqft
+                </div>
               </div>
-            </div>
+            ) : (
+              <div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Property Type</div>
+                <div style={{ fontSize: '1.05rem', fontWeight: '700', color: '#38BDF8' }}>
+                  {property.propertyType || 'Land / Acreage'}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Description */}

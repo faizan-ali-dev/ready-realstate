@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import BusinessCardSection from './components/BusinessCardSection';
 import ValuationCalculator from './components/ValuationCalculator';
-import ServicesSection from './components/ServicesSection';
+import SoldPropertiesSection from './components/SoldPropertiesSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
@@ -16,7 +16,7 @@ export default function App() {
         <HeroSection />
         <BusinessCardSection />
         <ValuationCalculator />
-        <ServicesSection />
+        <SoldPropertiesSection />
         <TestimonialsSection />
         <ContactSection />
       </main>
