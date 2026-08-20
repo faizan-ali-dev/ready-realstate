@@ -1,24 +1,23 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import BusinessCardSection from './components/BusinessCardSection';
-import ValuationCalculator from './components/ValuationCalculator';
-import SoldPropertiesSection from './components/SoldPropertiesSection';
-import TestimonialsSection from './components/TestimonialsSection';
-import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import AllSoldPropertiesPage from './pages/AllSoldPropertiesPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 
 export default function App() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--dark-bg)' }}>
       <Navbar />
       <main style={{ flexGrow: 1 }}>
-        <HeroSection />
-        <BusinessCardSection />
-        <ValuationCalculator />
-        <SoldPropertiesSection />
-        <TestimonialsSection />
-        <ContactSection />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/sold-properties" element={<AllSoldPropertiesPage />} />
+        </Routes>
       </main>
       <Footer />
     </div>

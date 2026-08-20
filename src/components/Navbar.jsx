@@ -1,48 +1,85 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Phone, Mail, Home, Menu, X, Award, MapPin } from 'lucide-react';
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   const navLinks = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'About Gail', href: '#about', id: 'about' },
-    { name: 'Valuation', href: '#valuation', id: 'valuation' },
-    { name: 'Sold Deals', href: '#services', id: 'services' },
-    { name: 'Reviews', href: '#reviews', id: 'reviews' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: 'Home', href: '/', id: 'home' },
+    { name: 'About Gail', href: '/about', id: 'about' },
+    { name: 'Valuation', href: '/#valuation', id: 'valuation' },
+    { name: 'Sold Deals', href: '/sold-properties', id: 'services' },
+    { name: 'Reviews', href: '/#reviews', id: 'reviews' },
+    { name: 'Contact', href: '/contact', id: 'contact' },
   ];
 
-  // Scroll Listener for Navbar Styling & Active Section Scrollspy
   useEffect(() => {
     const handleScroll = () => {
-      // Sticky navbar background toggle
       if (window.scrollY > 40) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
 
-      // ScrollSpy: Calculate which section is currently in view
-      const scrollPosition = window.scrollY + 140;
-      for (let i = navLinks.length - 1; i >= 0; i--) {
-        const section = document.getElementById(navLinks[i].id);
-        if (section) {
-          const sectionTop = section.offsetTop;
-          if (scrollPosition >= sectionTop) {
-            setActiveSection(navLinks[i].id);
-            break;
+      if (location.pathname === '/') {
+        const scrollPosition = window.scrollY + 140;
+        for (let i = navLinks.length - 1; i >= 0; i--) {
+          const section = document.getElementById(navLinks[i].id);
+          if (section) {
+            const sectionTop = section.offsetTop;
+            if (scrollPosition >= sectionTop) {
+              setActiveSection(navLinks[i].id);
+              break;
+            }
           }
         }
+      } else if (location.pathname === '/sold-properties') {
+        setActiveSection('services');
+      } else if (location.pathname === '/about') {
+        setActiveSection('about');
+      } else if (location.pathname === '/contact') {
+        setActiveSection('contact');
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
+
+  const handleNavClick = (e, link) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+
+    if (link.href === '/') {
+      if (location.pathname !== '/') {
+        navigate('/');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (link.href === '/about') {
+      navigate('/about');
+    } else if (link.href === '/contact') {
+      navigate('/contact');
+    } else if (link.href === '/sold-properties') {
+      navigate('/sold-properties');
+    } else if (link.href.startsWith('/#')) {
+      const sectionId = link.href.replace('/#', '');
+      if (location.pathname !== '/') {
+        navigate('/' + link.href);
+      } else {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -88,7 +125,11 @@ export default function Navbar() {
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '76px' }}>
           
           {/* Logo */}
-          <a href="#home" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <Link
+            to="/"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
+          >
             <div style={{
               width: '42px',
               height: '42px',
@@ -110,16 +151,18 @@ export default function Navbar() {
                 Gail Harpole • REALTOR®
               </div>
             </div>
-          </a>
+          </Link>
 
-          {/* Desktop Navigation Links with Clean Active Red Highlight (No bottom bar) */}
+          {/* Desktop Navigation Links */}
           <nav style={{ display: 'flex', alignItems: 'center', gap: '1.75rem' }} className="nav-desktop">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
+              const isActive = (link.href === '/sold-properties' && location.pathname === '/sold-properties') ||
+                (location.pathname === '/' && activeSection === link.id);
               return (
                 <a
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link)}
                   style={{
                     color: isActive ? '#F87171' : 'var(--text-secondary)',
                     fontWeight: isActive ? '700' : '500',
@@ -177,12 +220,13 @@ export default function Navbar() {
             gap: '0.85rem'
           }}>
             {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
+              const isActive = (link.href === '/sold-properties' && location.pathname === '/sold-properties') ||
+                (location.pathname === '/' && activeSection === link.id);
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, link)}
                   style={{
                     color: isActive ? '#F87171' : 'var(--text-main)',
                     fontWeight: isActive ? '700' : '600',

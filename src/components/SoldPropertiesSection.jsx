@@ -1,8 +1,37 @@
 import React, { useState } from 'react';
-import { MapPin, Bed, Bath, Maximize, CheckCircle2, Award, ChevronDown, ChevronUp, ArrowRight, ShieldCheck, Sparkles, Trees } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { MapPin, Bed, Bath, Maximize, CheckCircle2, ShieldCheck, ArrowRight, Trees } from 'lucide-react';
 import PropertyModal from './PropertyModal';
 
 export const soldPropertiesData = [
+  {
+    id: '303-n-lamar-st',
+    title: '303 N Lamar St',
+    address: '303 N Lamar St',
+    city: 'Tioga',
+    state: 'TX',
+    zip: '76271',
+    status: 'SOLD',
+    price: 'Contact for Price',
+    role: 'Represented Buyer',
+    beds: 2,
+    baths: 1,
+    sqft: 1221,
+    propertyType: 'Single Family Residence',
+    image: '/images/sold/303-n-lamar-st/65bf6e78f42766940cf9df2698c56115l-m2995295912rd-w960_h720.webp',
+    images: [
+      '/images/sold/303-n-lamar-st/65bf6e78f42766940cf9df2698c56115l-m2995295912rd-w960_h720.webp',
+      '/images/sold/303-n-lamar-st/65bf6e78f42766940cf9df2698c56115l-m3135208555rd-w960_h720.webp',
+      '/images/sold/303-n-lamar-st/65bf6e78f42766940cf9df2698c56115l-m3198717335rd-w960_h720.webp',
+      '/images/sold/303-n-lamar-st/65bf6e78f42766940cf9df2698c56115l-m359131795rd-w960_h720.webp',
+      '/images/sold/303-n-lamar-st/65bf6e78f42766940cf9df2698c56115l-m899598765rd-w960_h720.webp',
+      '/images/sold/303-n-lamar-st/65bf6e78f42766940cf9df2698c56115l-m927368179rd-w960_h720.webp',
+      '/images/sold/303-n-lamar-st/65bf6e78f42766940cf9df2698c56115l-m1079368492rd-w960_h720.webp',
+      '/images/sold/303-n-lamar-st/65bf6e78f42766940cf9df2698c56115l-m1404152142rd-w960_h720.webp',
+      '/images/sold/303-n-lamar-st/65bf6e78f42766940cf9df2698c56115l-m1573694846rd-w960_h720.webp'
+    ],
+    description: 'Charming single-family home located at 303 N Lamar St in the heart of Tioga, Texas. Features 2 Bedrooms, 1 Bathroom, and 1,221 sqft of comfortable living space. Gail Harpole expertly represented the buyers to closing.'
+  },
   {
     id: '10513-evans-rd',
     title: '10513 Evans Rd',
@@ -50,22 +79,6 @@ export const soldPropertiesData = [
     propertyType: 'Single Family Home',
     image: '/images/sold/203-fitzgerald-ct.jpg',
     description: 'Custom cul-de-sac residence in Tioga, Texas. Gail Harpole served as Co-Listing Agent representing the property.'
-  },
-  {
-    id: '303-n-lamar-st',
-    title: '303 N Lamar St',
-    address: '303 N Lamar St',
-    city: 'Tioga',
-    state: 'TX',
-    zip: '76271',
-    status: 'SOLD',
-    role: 'Represented Buyer',
-    beds: 2,
-    baths: 1,
-    sqft: 1221,
-    propertyType: 'Single Family Residence',
-    image: '/images/sold/303-n-lamar-st.jpg',
-    description: 'Comfortable family home in the heart of Tioga. Gail Harpole successfully represented the buyers.'
   },
   {
     id: '4455-donegal-dr',
@@ -230,9 +243,8 @@ export const soldPropertiesData = [
 ];
 
 export default function SoldPropertiesSection() {
-  const [showAll, setShowAll] = useState(false);
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('All');
-  const [selectedProperty, setSelectedProperty] = useState(null);
 
   // Filter items
   const filteredProperties = soldPropertiesData.filter((item) => {
@@ -244,8 +256,8 @@ export default function SoldPropertiesSection() {
     return true;
   });
 
-  // Display first 3 initially, all on click
-  const displayedProperties = showAll ? filteredProperties : filteredProperties.slice(0, 3);
+  // Display strictly first 3 in single row for home page
+  const displayedProperties = filteredProperties.slice(0, 3);
 
   return (
     <section id="services" style={{ padding: '5rem 0', background: '#0B0F19', position: 'relative' }}>
@@ -270,7 +282,7 @@ export default function SoldPropertiesSection() {
             Recently Sold <span style={{ color: 'var(--primary-red)' }}>Properties & Closed Deals</span>
           </h2>
           <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', maxWidth: '680px', margin: '0 auto' }}>
-            Browse {soldPropertiesData.length} successfully closed residential homes, country properties, and acreage transactions represented by Gail Harpole across North Texas & Southern Oklahoma.
+            Browse featured closed deals represented by Gail Harpole across North Texas & Southern Oklahoma. Click any deal or "See All" to view full portfolio.
           </p>
         </div>
 
@@ -328,7 +340,7 @@ export default function SoldPropertiesSection() {
           })}
         </div>
 
-        {/* Properties Grid */}
+        {/* Properties Grid (Strict 3 Columns in 1 Row) */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
@@ -338,7 +350,7 @@ export default function SoldPropertiesSection() {
             <div
               key={prop.id}
               className="glass-card"
-              onClick={() => setSelectedProperty(prop)}
+              onClick={() => navigate('/sold-properties?id=' + prop.id)}
               style={{
                 overflow: 'hidden',
                 display: 'flex',
@@ -532,43 +544,28 @@ export default function SoldPropertiesSection() {
           ))}
         </div>
 
-        {/* Explore More Button Toggle */}
-        {filteredProperties.length > 3 && (
-          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="btn-outline"
-              style={{
-                padding: '0.85rem 2.2rem',
-                fontSize: '0.95rem',
-                fontWeight: '700',
-                borderColor: 'rgba(200, 16, 46, 0.4)',
-                background: showAll ? 'rgba(200, 16, 46, 0.15)' : 'rgba(255, 255, 255, 0.04)',
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
-              }}
-            >
-              {showAll ? (
-                <>
-                  <ChevronUp size={18} color="var(--primary-red)" /> Show Fewer Properties
-                </>
-              ) : (
-                <>
-                  <ChevronDown size={18} color="var(--primary-red)" /> Explore More Sold Properties ({filteredProperties.length - 3} more)
-                </>
-              )}
-            </button>
-          </div>
-        )}
+        {/* Redirect Button to Full Page */}
+        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+          <button
+            onClick={() => navigate('/sold-properties')}
+            className="btn-outline"
+            style={{
+              padding: '0.9rem 2.4rem',
+              fontSize: '0.98rem',
+              fontWeight: '700',
+              borderColor: 'rgba(200, 16, 46, 0.5)',
+              background: 'rgba(200, 16, 46, 0.12)',
+              boxShadow: '0 4px 20px rgba(200, 16, 46, 0.25)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.6rem'
+            }}
+          >
+            Explore All Sold Properties ({soldPropertiesData.length} Deals) <ArrowRight size={18} color="var(--primary-red)" />
+          </button>
+        </div>
 
       </div>
-
-      {/* Property Details Modal */}
-      {selectedProperty && (
-        <PropertyModal
-          property={selectedProperty}
-          onClose={() => setSelectedProperty(null)}
-        />
-      )}
 
       <style>{`
         @media (max-width: 992px) {
