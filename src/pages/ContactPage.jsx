@@ -55,10 +55,10 @@ export default function ContactPage() {
           </p>
         </div>
 
-        {/* Contact Form & Info Section */}
-        <ContactSection />
-
       </div>
+      
+      {/* Contact Form & Info Section */}
+      <ContactSection />
     </div>
   );
 }

@@ -56,15 +56,13 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* Core Business Card Section */}
-        <BusinessCardSection />
-
-        {/* Testimonials */}
-        <div style={{ marginTop: '3rem' }}>
-          <TestimonialsSection />
-        </div>
-
       </div>
+
+      {/* Core Business Card Section */}
+      <BusinessCardSection />
+
+      {/* Testimonials */}
+      <TestimonialsSection />
     </div>
   );
 }
