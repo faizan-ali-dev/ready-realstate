@@ -195,7 +195,7 @@ export default function ValuationCalculator() {
               </div>
 
               {/* Texas Taxes, Insurance & HOA Inline Inputs */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: '0.5rem' }}>
                 <div style={{ background: 'rgba(15, 23, 42, 0.6)', padding: '0.4rem 0.55rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
                   <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Property Tax</div>
                   <div style={{ fontSize: '0.82rem', fontWeight: '700', color: '#FFF' }}>{propertyTaxRate}%/yr</div>

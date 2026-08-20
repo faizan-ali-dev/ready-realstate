@@ -10,7 +10,7 @@ export default function Footer() {
     <footer style={{ background: '#070A12', color: '#94A3B8', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '4rem 0 2rem 0', position: 'relative' }}>
       <div className="container">
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem', marginBottom: '3rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '2.5rem', marginBottom: '3rem' }}>
           
           {/* Column 1: Brand & Slogan */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

@@ -12,7 +12,7 @@ export default function BusinessCardSection() {
           <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)' }}>Over 10 years of North Texas real estate success combined with 20+ years of high-touch customer care.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem', alignItems: 'center' }}>
           
           {/* Digital Business Card Showcase (Edited Studio Blazer Portrait Perfectly Fitted) */}
           <div style={{ perspective: '1000px' }}>
@@ -182,8 +182,8 @@ export default function BusinessCardSection() {
               </p>
             </div>
 
-            {/* Feature Checklist (2x2 Grid) */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }}>
+            {/* Feature Checklist */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '0.75rem' }}>
               
               <div className="glass-card" style={{ padding: '0.9rem', display: 'flex', alignItems: 'flex-start', gap: '0.6rem', borderRadius: '12px' }}>
                 <CheckCircle2 color="#F87171" size={18} style={{ flexShrink: 0, marginTop: '2px' }} />

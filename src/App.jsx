@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ChatBot from './components/ChatBot';
 import HomePage from './pages/HomePage';
 import AllSoldPropertiesPage from './pages/AllSoldPropertiesPage';
 import AboutPage from './pages/AboutPage';
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/sold-properties" element={<AllSoldPropertiesPage />} />
         </Routes>
       </main>
+      <ChatBot />
       <Footer />
     </div>
   );

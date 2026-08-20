@@ -289,7 +289,7 @@ export default function PropertyModal({ property, onClose }) {
           {/* Specs Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 130px), 1fr))',
             gap: '1rem',
             background: 'rgba(15, 23, 42, 0.6)',
             padding: '1.25rem',
@@ -373,7 +373,7 @@ export default function PropertyModal({ property, onClose }) {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmitTour} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                <form onSubmit={handleSubmitTour} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
                   <input
                     type="text"
                     required

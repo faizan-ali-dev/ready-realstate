@@ -172,7 +172,7 @@ export default function TestimonialsSection() {
               </p>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.8rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1rem' }}>
               <div>
                 <div style={{ fontWeight: '700', fontSize: '0.98rem', color: '#FFF' }}>
                   {reviews[currentIndex].author}
